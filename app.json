@@ -6,6 +6,16 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "expo": {
+      "packagerOpts": {
+        "config": "metro.config.js",
+        "sourceExts": [
+          "js",
+          "jsx",
+          "css"
+        ]
+      }
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,7 +31,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hausemaster.FamilyTree"
     },
     "web": {
       "favicon": "./assets/favicon.png"

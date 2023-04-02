@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>my-family-chart</title>
+  <script src="https://unpkg.com/d3@6"></script>
+  <script src="https://unpkg.com/family-chart"></script>
+  <link rel="stylesheet" href="./family-chart.css">  <!-- create file 'family-chart.css' in same directory, copy/paste css from examples/create-tree -->
+</head>
+<body>
+  <div id="FamilyChart" class="f3"></div>
+  <script type="module">
+    
+    const store = f3.createStore({
+        data: data(),
+        node_separation: 250,
+        level_separation: 150
+      }),
+      view = f3.d3AnimationView({
+        store,
+        cont: document.querySelector("#FamilyChart")
+      }),
+      Card = f3.elements.Card({
+        store,
+        svg: view.svg,
+        card_dim: {w:220,h:70,text_x:75,text_y:15,img_w:60,img_h:60,img_x:5,img_y:5},
+        card_display: [d => `${d.data['first name'] || ''} ${d.data['last name'] || ''}`,d => `${d.data['birthday'] || ''}`],
+        mini_tree: true,
+        link_break: false
+      })
+  
+    view.setCard(Card)
+    store.setOnUpdate(props => view.update(props || {}))
+    store.update.tree({initial: true})
+    
+    function data() {
+      return [
+  {
+    "id": "0",
+    "rels": {},
+    "data": {
+      "first name": "Name",
+      "last name": "Surname",
+      "birthday": 1970,
+      "avatar": "https://static8.depositphotos.com/1009634/988/v/950/depositphotos_9883921-stock-illustration-no-user-profile-picture.jpg",
+      "gender": "M"
+    }
+  },
+  {
+    "id": "1",
+    "rels": {},
+    "data": {
+      "first name": "Name",
+      "last name": "Surname",
+      "birthday": 1970,
+      "avatar": "https://static8.depositphotos.com/1009634/988/v/950/depositphotos_9883921-stock-illustration-no-user-profile-picture.jpg",
+      "gender": "M"
+    }
+  }
+]
+    }
+  
+  </script>
+</body>
+</html>
