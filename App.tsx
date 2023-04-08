@@ -265,7 +265,12 @@ const FamilyTree = () => {
                 </TouchableOpacity>
 
               </View>
-              <Image style={myStyles.line}></Image>
+              <View>
+                <Image style={myStyles.line}></Image>
+                {/* <Image style={myStyles.line}></Image> */}
+                {/* <Image style={myStyles.line}></Image> */}
+
+              </View>
 
             </View>
 
