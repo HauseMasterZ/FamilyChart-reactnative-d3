@@ -13,6 +13,7 @@ import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-vi
 import * as ImagePicker from 'expo-image-picker'
 // import { Modal,ModalManager,Effect} from 'react-dynamic-modal';
 // import editScreen from './EditScreen';
+
 const FamilyTree = () => {
   // const [name, setName] = useState('Name Surname')
   const [dob, setDob] = useState(['0'])
@@ -240,7 +241,6 @@ const FamilyTree = () => {
                   visible={visibleModal}
                   animationType='fade'
                   onRequestClose={hideEditModal}
-                // transparent
                 >
                   <Pressable style={myStyles.upper} onPress={hideEditModal} />
                   <View style={myStyles.lower}>
