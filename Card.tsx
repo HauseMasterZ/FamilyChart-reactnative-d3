@@ -265,7 +265,6 @@ const TreeCard = () => {
               </View>
               <View>
                 <Image style={myStyles.line}></Image>
-                {/* <Image style={myStyles.line}></Image> */}
 
               </View>
 
