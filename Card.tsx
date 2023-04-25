@@ -196,8 +196,6 @@ const TreeCard = () => {
 
 
 
-  // const cardColor = '#b0dce4'
-  // const [cardColor, setcardColor] = useState('#b0dce4')
   return (
 
     <View style={myStyles.body}>
