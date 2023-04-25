@@ -21,6 +21,7 @@
     "react-dynamic-modal": "^1.1.1",
     "react-native": "0.71.6",
     "react-native-d3-tree-graph": "^1.0.12",
+    "react-native-final-tree-view": "^3.0.0",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-image-picker": "^5.3.1",
     "react-native-radio-buttons-group": "^2.3.2",
