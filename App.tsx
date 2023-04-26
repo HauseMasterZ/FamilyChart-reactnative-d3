@@ -68,5 +68,5 @@ function App() {
       </View>
   )
 }
-// okol
+// ok
 export default App
