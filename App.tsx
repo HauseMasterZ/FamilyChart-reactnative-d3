@@ -13,8 +13,9 @@ import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-vi
 import * as ImagePicker from 'expo-image-picker'
 // import { Modal,ModalManager,Effect} from 'react-dynamic-modal';
 // import editScreen from './EditScreen';
-import ActionSheet from 'react-native-actions-sheet';
-import {Menu, MenuOptions, MenuOption, MenuTrigger, MenuProvider} from 'react-native-popup-menu'
+import ActionSheet from "react-native-actions-sheet";
+
+import { ActionSheetRef } from 'react-native-actions-sheet';
 const TreeCard = () => {
   // const [name, setName] = useState('Name Surname')
   const [dob, setDob] = useState(['0'])
@@ -110,7 +111,7 @@ const TreeCard = () => {
   const handleAdd = (index) => {
     // setAllPhotos([...AllPhotos, 'https://static8.depositphotos.com/1009634/988/v/950/depositphotos_9883921-stock-illustration-no-user-profile-picture.jpg'])
     let old_pics = [...AllPhotos]
-    old_pics.splice(index+1, 0, 'https://static8.depositphotos.com/1009634/988/v/950/depositphotos_9883921-stock-illustration-no-user-profile-picture.jpg')
+    old_pics.splice(index + 1, 0, 'https://static8.depositphotos.com/1009634/988/v/950/depositphotos_9883921-stock-illustration-no-user-profile-picture.jpg')
     setAllPhotos(old_pics)
 
 
@@ -123,18 +124,18 @@ const TreeCard = () => {
     // setCardColors([...cardColors, true])
 
     let old_cardcolors = [...cardColors]
-    old_cardcolors.splice(index+1, 0, true)
+    old_cardcolors.splice(index + 1, 0, true)
     setCardColors(old_cardcolors)
 
     // setNames([...names, 'Name Surname'])
     let old_names = [...names]
-    old_names.splice(index+1, 0, 'Name Surname')
+    old_names.splice(index + 1, 0, 'Name Surname')
     setNames(old_names)
 
 
     // setDob([...dob, '0'])
     let old_dobs = [...dob]
-    old_dobs.splice(index+1, 0, '0')
+    old_dobs.splice(index + 1, 0, '0')
     setDob(old_dobs)
 
 
@@ -161,16 +162,16 @@ const TreeCard = () => {
       label: 'Male',
       value: 'Male',
       "selected": false,
-  
+
     },
     {
       id: (3).toString(),
       label: 'Female',
       value: 'Female',
       "selected": false,
-  
+
     }];
-    old_radio.splice(index+1, 0, tmp)
+    old_radio.splice(index + 1, 0, tmp)
     setRadioButtons(old_radio)
   }
 
@@ -197,8 +198,7 @@ const TreeCard = () => {
     setDob(old_dobs)
   }
 
-
-
+  let optionsArr = ['Add Prior Generation', 'Add Same Generation', 'Add Next Generation', 'Cancel']
   return (
 
     <View style={myStyles.body}>
@@ -217,7 +217,7 @@ const TreeCard = () => {
 
         <View>
           {input.map((input, index) => (
-            <View key={index} style={{right: (index) * 200}}>
+            <View key={index} style={{ right: (index) * 200 }}>
               {/* {displayLine(index)} */}
               <View style={[myStyles.card, turnPink(index)]}>
                 <TouchableOpacity onPress={() => { openPicker(index) }} style={{ width: 100, height: 100 }}>
@@ -232,10 +232,8 @@ const TreeCard = () => {
                   {dob[index] == '' ? '0' : dob[index]}
                 </Text>
 
-                <ActionSheet ref = {actionsheet} title = {'Add Node'} options = {addOption} cancelButtonIndex = {3}>
-                  
 
-                </ActionSheet>
+
                 <TouchableOpacity style={myStyles.editBtn} onPress={() => { showEditModal(); setcurrIndex(index); }}>
                   <Image source={{ uri: "https://cdn-icons-png.flaticon.com/512/84/84380.png" }} style={{ width: '100%', height: '100%' }} />
                 </TouchableOpacity>
@@ -267,8 +265,26 @@ const TreeCard = () => {
                     </TextInput>
                   </View>
                 </Modal>
-
-                <TouchableOpacity style={myStyles.plusBtn} onPress={() => { handleAdd(index) }}>
+                <ActionSheet ref={actionSheetRef} gestureEnabled={true} containerStyle={myStyles.generation} >
+                  <TouchableOpacity>
+                    <Text>
+                      Add Next Generation
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text>
+                      Add Same Generation
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text>
+                      Add Prior Generation
+                    </Text>
+                  </TouchableOpacity>
+                </ActionSheet>
+                <TouchableOpacity style={myStyles.plusBtn} onPress={() => { 
+                  // handleAdd(index); 
+                  actionSheetRef.current?.show() }}>
                   <Image source={{ uri: "https://cdn0.iconfinder.com/data/icons/ui-16px-perfect-megapack-line/16/82_Add-512.png" }} style={{ width: '100%', height: '100%' }} />
                 </TouchableOpacity>
 
@@ -398,6 +414,10 @@ const myStyles = StyleSheet.create({
     width: 200,
     height: 2,
     right: 48,
+  },
+  generation: {
+    height: '40%',
+    
   }
 });
 
