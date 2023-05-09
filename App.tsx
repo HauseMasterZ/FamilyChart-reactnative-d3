@@ -278,7 +278,7 @@ const TreeCard = () => {
                   </TouchableOpacity>
                   <TouchableOpacity>
                     <Text>
-                      Add Prior Generation
+                      Add Prior Generation.
                     </Text>
                   </TouchableOpacity>
                 </ActionSheet>
