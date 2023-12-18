@@ -231,10 +231,7 @@ const TreeCard = () => {
                   {/* {dob ? (dob) : ('0')} */}
                   {dob[index] == '' ? '0' : dob[index]}
                 </Text>
-
-
-
-                <TouchableOpacity style={myStyles.editBtn} onPress={() => { showEditModal(); setcurrIndex(index); }}>
+                <TouchableOpacity style={myStyles.editBtn} onPress={() => { showrEditModal(); setcurrIndex(index); }}>
                   <Image source={{ uri: "https://cdn-icons-png.flaticon.com/512/84/84380.png" }} style={{ width: '100%', height: '100%' }} />
                 </TouchableOpacity>
 
