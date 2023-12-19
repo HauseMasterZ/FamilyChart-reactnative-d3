@@ -109,7 +109,6 @@ const TreeCard = () => {
   const [input, setinput] = useState([''])
 
   const handleAdd = (index) => {
-    // setAllPhotos([...AllPhotos, 'https://static8.depositphotos.com/1009634/988/v/950/depositphotos_9883921-stock-illustration-no-user-profile-picture.jpg'])
     let old_pics = [...AllPhotos]
     old_pics.splice(index + 1, 0, 'https://static8.depositphotos.com/1009634/988/v/950/depositphotos_9883921-stock-illustration-no-user-profile-picture.jpg')
     setAllPhotos(old_pics)
@@ -138,24 +137,6 @@ const TreeCard = () => {
     old_dobs.splice(index + 1, 0, '0')
     setDob(old_dobs)
 
-
-
-
-    // setRadioButtons([...radioButtons, [{
-    //   id: (index + 2).toString(), // acts as primary key, should be unique and non-empty string
-    //   label: 'Male',
-    //   value: 'Male',
-    //   "selected": false,
-
-    // },
-    // {
-    //   id: (index + 3).toString(),
-    //   label: 'Female',
-    //   value: 'Female',
-    //   "selected": false,
-
-    // }]])
-
     let old_radio = [...radioButtons]
     let tmp = [{
       id: (2).toString(), // acts as primary key, should be unique and non-empty string
@@ -174,9 +155,6 @@ const TreeCard = () => {
     old_radio.splice(index + 1, 0, tmp)
     setRadioButtons(old_radio)
   }
-
-
-
 
   const handleRemove = (index: number) => {
     // console.log(index)
@@ -231,7 +209,7 @@ const TreeCard = () => {
                   {/* {dob ? (dob) : ('0')} */}
                   {dob[index] == '' ? '0' : dob[index]}
                 </Text>
-                <TouchableOpacity style={myStyles.editBtn} onPress={() => { showrEditModal(); setcurrIndex(index); }}>
+                <TouchableOpacity style={myStyles.editBtn} onPress={() => { showEditModal(); setcurrIndex(index); }}>
                   <Image source={{ uri: "https://cdn-icons-png.flaticon.com/512/84/84380.png" }} style={{ width: '100%', height: '100%' }} />
                 </TouchableOpacity>
 
@@ -262,26 +240,29 @@ const TreeCard = () => {
                     </TextInput>
                   </View>
                 </Modal>
-                <ActionSheet ref={actionSheetRef} gestureEnabled={true} containerStyle={myStyles.generation} >
-                  <TouchableOpacity>
-                    <Text>
-                      Add Next Generation
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text>
-                      Add Same Generation
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text>
-                      Add Prior Generation.
-                    </Text>
-                  </TouchableOpacity>
+                <ActionSheet ref={actionSheetRef} gestureEnabled={true} containerStyle={{ ...myStyles.generation, backgroundColor: '#2b3b8a' }} >
+                  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+                    <TouchableOpacity style={{ padding: 10, alignItems: 'center', backgroundColor: '#ADD8E6', marginBottom: 10, borderRadius: 10 }}>
+                      <Text>
+                        Add Next Generation
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ padding: 10, alignItems: 'center', backgroundColor: '#ADD8E6', marginBottom: 10, borderRadius: 10 }}>
+                      <Text>
+                        Add Same Generation
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ padding: 10, alignItems: 'center', backgroundColor: '#ADD8E6', borderRadius: 10 }}>
+                      <Text>
+                        Add Prior Generation.
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </ActionSheet>
-                <TouchableOpacity style={myStyles.plusBtn} onPress={() => { 
+                <TouchableOpacity style={myStyles.plusBtn} onPress={() => {
                   // handleAdd(index); 
-                  actionSheetRef.current?.show() }}>
+                  actionSheetRef.current?.show()
+                }}>
                   <Image source={{ uri: "https://cdn0.iconfinder.com/data/icons/ui-16px-perfect-megapack-line/16/82_Add-512.png" }} style={{ width: '100%', height: '100%' }} />
                 </TouchableOpacity>
 
@@ -414,7 +395,7 @@ const myStyles = StyleSheet.create({
   },
   generation: {
     height: '40%',
-    
+
   }
 });
 
