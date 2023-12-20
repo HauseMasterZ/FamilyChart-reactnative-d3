@@ -196,17 +196,14 @@ const TreeCard = () => {
         <View>
           {input.map((input, index) => (
             <View key={index} style={{ right: (index) * 200 }}>
-              {/* {displayLine(index)} */}
               <View style={[myStyles.card, turnPink(index)]}>
                 <TouchableOpacity onPress={() => { openPicker(index) }} style={{ width: 100, height: 100 }}>
                   <Image style={[myStyles.avatar]} source={{ uri: AllPhotos[index] }} />
                 </TouchableOpacity>
                 <Text style={myStyles.naming}>
-                  {/* {name ? (name) : ('Name Surname')} */}
                   {names[index] == '' ? 'Name Surname' : names[index]}
                 </Text>
                 <Text style={myStyles.dob}>
-                  {/* {dob ? (dob) : ('0')} */}
                   {dob[index] == '' ? '0' : dob[index]}
                 </Text>
                 <TouchableOpacity style={myStyles.editBtn} onPress={() => { showEditModal(); setcurrIndex(index); }}>
@@ -225,9 +222,6 @@ const TreeCard = () => {
                 >
                   <Pressable style={myStyles.upper} onPress={hideEditModal} />
                   <View style={myStyles.lower}>
-                    {/* <View style={{ position: 'absolute', left: '37%', top: '5%' }} >
-                      <RadioGroup radioButtons={radioButtons[index]} onPress={(event) => { onPressRadioButton(event, currIndex) }} layout='row' containerStyle={myStyles.gender}></RadioGroup>
-                    </View> */}
                     <TouchableOpacity onPress={hideEditModal} >
                       <Image style={{ height: 22, width: 22, backgroundColor: 'white', left: 5, top: 5 }} source={{ uri: 'https://static.thenounproject.com/png/809529-200.png' }} />
                     </TouchableOpacity>
