@@ -3,14 +3,13 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import EditModal from './EditModal';
 import GenerateActionSheet from './GenerateActionSheet';
 import myStyles from '../static/styles/styles';
-const Card = ({ index, openPicker, AllPhotos, names, dob, showEditModal, currIndex,  setcurrIndex, visibleModal, hideEditModal, handleRemove, setIndexName, setDobName, radioButtons, onPressRadioButton, actionSheetRef }) => {
-  const turnPink = (index) => {
-    // Replace this with your actual logic
+const Card = ({ index, openPicker, AllPhotos, names, dob, showEditModal, currIndex, setcurrIndex, visibleModal, hideEditModal, handleRemove, setIndexName, setDobName, radioButtons, onPressRadioButton, actionSheetRef, updateFamilyMembers }) => {
+  const turnPink = () => {
     return index % 2 === 0 ? { backgroundColor: 'pink' } : {};
   };
   return (
     <View key={index} style={{ right: (index) * 200 }}>
-      <View style={[myStyles.card, turnPink(index)]}>
+      <View style={[myStyles.card, turnPink()]}>
         <TouchableOpacity onPress={() => { openPicker(index) }} style={{ width: 100, height: 100 }}>
           <Image style={[myStyles.avatar]} source={{ uri: AllPhotos[index] }} />
         </TouchableOpacity>
@@ -34,6 +33,8 @@ const Card = ({ index, openPicker, AllPhotos, names, dob, showEditModal, currInd
           currIndex={currIndex}
           radioButtons={radioButtons}
           onPressRadioButton={onPressRadioButton}
+          index={index}
+          updateFamilyMembers={updateFamilyMembers}
         />
         <GenerateActionSheet actionSheetRef={actionSheetRef} />
         <TouchableOpacity style={myStyles.plusBtn} onPress={() => {

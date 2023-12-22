@@ -3,13 +3,12 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, StatusBar, 
 import { Dimensions, Image } from "react-native";
 import { RadioButtonProps } from 'react-native-radio-buttons-group';
 import { ActionSheetRef } from 'react-native-actions-sheet';
-import { useState, } from 'react';
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
 import * as ImagePicker from 'expo-image-picker'
 import myStyles from '../static/styles/styles';
-import GenerateActionSheet from './GenerateActionSheet';
 import familyMembers from '../static/data/familyMembers.json';
-import EditModal from './EditModal';
 import Card from './Card';
 
 const TreeCard = () => {
@@ -53,7 +52,6 @@ const TreeCard = () => {
     }]
   ]);
 
-  const [usePink, setUsePink] = useState(false)
   const [cardColors, setCardColors] = useState([true, true])
 
   function onPressRadioButton(radioButtonsArray: {
@@ -82,7 +80,7 @@ const TreeCard = () => {
   const setDobName = (event: string, ind: number) => {
     // console.log(ind)
     let old_dobs = dob
-    old_dobs[ind] = event
+    // old_dobs[ind] = event
     setDob(old_dobs)
   }
   const setIndexName = (event: string, ind: number) => {
@@ -94,7 +92,6 @@ const TreeCard = () => {
 
   const turnPink = (ind: number) => {
     if (cardColors[ind]) {
-      // console.log('gir')
       return { backgroundColor: '#b0dce4' }
     }
     else {
@@ -113,14 +110,9 @@ const TreeCard = () => {
     const newInputs = [...input]
     newInputs.push('')
     setinput(newInputs)
-
-    // setCardColors([...cardColors, true])
-
     let old_cardcolors = [...cardColors]
     old_cardcolors.splice(index + 1, 0, true)
     setCardColors(old_cardcolors)
-
-    // setNames([...names, 'Name Surname'])
     let old_names = [...names]
     old_names.splice(index + 1, 0, 'Name Surname')
     setNames(old_names)
@@ -128,7 +120,7 @@ const TreeCard = () => {
 
     // setDob([...dob, '0'])
     let old_dobs = [...dob]
-    old_dobs.splice(index + 1, 0, '0')
+    old_dobs.splice(index + 1, 0, 0)
     setDob(old_dobs)
 
     let old_radio = [...radioButtons]
@@ -168,12 +160,27 @@ const TreeCard = () => {
     setNames(old_names)
     setDob(old_dobs)
   }
+  // Save data
+  const updateFamilyMembers = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@familyMembers', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
 
-  let optionsArr = ['Add Prior Generation', 'Add Same Generation', 'Add Next Generation', 'Cancel']
+  // Read data
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@familyMembers')
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      // error reading value
+    }
+  }
   return (
-
     <View style={myStyles.body}>
-
       <ReactNativeZoomableView
         initialZoom={1}
         minZoom={0.15}
@@ -186,27 +193,26 @@ const TreeCard = () => {
         doubleTapZoomToCenter={false}
       >
         <View>
-            <Card
-              index={0}
-              openPicker={openPicker}
-              AllPhotos={AllPhotos}
-              names={names}
-              dob={dob}
-              showEditModal={showEditModal}
-              currIndex={currIndex}
-              setcurrIndex={setcurrIndex}
-              visibleModal={visibleModal}
-              hideEditModal={hideEditModal}
-              handleRemove={handleRemove}
-              setIndexName={setIndexName}
-              setDobName={setDobName}
-              radioButtons={radioButtons}
-              onPressRadioButton={onPressRadioButton}
-              actionSheetRef={actionSheetRef}
-            />
+          <Card
+            index={0}
+            openPicker={openPicker}
+            AllPhotos={AllPhotos}
+            names={names}
+            dob={dob}
+            showEditModal={showEditModal}
+            currIndex={currIndex}
+            setcurrIndex={setcurrIndex}
+            visibleModal={visibleModal}
+            hideEditModal={hideEditModal}
+            handleRemove={handleRemove}
+            setIndexName={setIndexName}
+            setDobName={setDobName}
+            radioButtons={radioButtons}
+            onPressRadioButton={onPressRadioButton}
+            actionSheetRef={actionSheetRef}
+            updateFamilyMembers={updateFamilyMembers}
+          />
         </View>
-
-        {/* <Button title='add' onPress={handleAdd} /> */}
       </ReactNativeZoomableView>
     </View>
 

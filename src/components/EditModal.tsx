@@ -4,8 +4,15 @@ import { Modal, Pressable, View, TouchableOpacity, Image, TextInput } from 'reac
 import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
 ``
 import myStyles from '../static/styles/styles';
-const EditModal = ({ visibleModal, hideEditModal, handleRemove, setIndexName, setDobName, names, dob, currIndex, radioButtons, onPressRadioButton }) => {
+const EditModal = ({ visibleModal, hideEditModal, handleRemove, setIndexName, setDobName, names, dob, currIndex, radioButtons, onPressRadioButton, index, updateFamilyMembers }) => {
 
+    const handleEdit = (newDetails) => {
+        // Update the details in the parent component
+        updateFamilyMembers(index, newDetails);
+
+        // Close the modal
+        hideEditModal();
+    };
     return (
         <Modal
             visible={visibleModal}
